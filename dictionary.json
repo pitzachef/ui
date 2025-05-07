@@ -1,0 +1,112 @@
+{
+  "services": [
+    "Workspace",
+    "Players",
+    "Lighting",
+    "ReplicatedStorage",
+    "ServerStorage",
+    "HttpService",
+    "RunService",
+    "SoundService",
+    "MarketplaceService",
+    "UserInputService",
+    "Teams",
+    "TextService",
+    "TeleportService",
+    "TweenService"
+  ],
+  
+  "classes": {
+    "Instance": {
+      "properties": {
+        "Name": "string",
+        "Parent": "Instance",
+        "ClassName": "string",
+        "Archivable": "boolean"
+      },
+      "methods": {
+        "FindFirstChild": "Instance",
+        "GetChildren": "Instance[]",
+        "Destroy": "void",
+        "Clone": "Instance",
+        "GetAttribute": "any",
+        "SetAttribute": "void"
+      }
+    },
+    
+    "Part": {
+      "inherits": "Instance",
+      "properties": {
+        "Position": "Vector3",
+        "Size": "Vector3",
+        "Color": "Color3",
+        "Material": "Enum.Material",
+        "Anchored": "boolean"
+      }
+    },
+    
+    "Player": {
+      "inherits": "Instance",
+      "properties": {
+        "UserId": "number",
+        "Character": "Model",
+        "Backpack": "Backpack",
+        "Team": "Team"
+      }
+    },
+    
+    "Humanoid": {
+      "inherits": "Instance",
+      "properties": {
+        "WalkSpeed": "number",
+        "JumpPower": "number",
+        "Health": "number"
+      }
+    }
+  },
+  
+  "enums": {
+    "Material": [
+      "Plastic",
+      "Wood",
+      "Slate",
+      "Concrete",
+      "Metal",
+      "Glass",
+      "Granite"
+    ]
+  },
+  
+  "types": {
+    "Vector3": {
+      "constructor": "new(x: number, y: number, z: number)",
+      "methods": ["Lerp", "Dot", "Magnitude"]
+    },
+    "CFrame": {
+      "constructor": "new(x: number, y: number, z: number)",
+      "methods": ["Inverse", "Lerp"]
+    }
+  },
+  
+  "synapse": {
+    "functions": [
+      "getgenv",
+      "getrenv",
+      "request",
+      "loadstring",
+      "hookfunction",
+      "getgc",
+      "is_synapse_function"
+    ],
+    "drawing": [
+      "NewText",
+      "NewLine",
+      "NewCircle",
+      "NewSquare"
+    ],
+    "snippets": {
+      "loadstring_rbx": "loadstring('(cursor select here)')",
+      "loadstring_http": "loadstring(game:HttpGet('url (CURSOR/SELECT HERE)'))()"
+    }
+  }
+}

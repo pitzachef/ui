@@ -1,19 +1,74 @@
 {
-  "services": [
-    "Workspace",
-    "Players",
+  "globals": [
+    "game",
+    "workspace",
+    "players",
     "Lighting",
-    "ReplicatedStorage",
-    "ServerStorage",
-    "HttpService",
     "RunService",
-    "SoundService",
-    "MarketplaceService",
-    "UserInputService",
-    "Teams",
-    "TextService",
     "TeleportService",
+    "DataStoreService",
+    "ReplicatedStorage",
+    "ServerScriptService",
+    "ServerStorage",
+    "StarterGui",
+    "StarterPack",
+    "StarterPlayer",
+    "HttpService",
+    "PhysicsService",
     "TweenService",
+    "MarketplaceService",
+    "CollectionService",
+    "Chat",
+    "SoundService",
+    "VRService",
+    "Debris",
+    "BadgeService",
+    "BadgeService",
+    "LocalizationService",
+    "Stats",
+    "Settings",
+    "StarterPlayerScripts",
+    "StarterCharacterScripts",
+    "CoreGui",
+    "Debris",
+    "LogService",
+    "NotificationService",
+    "TeamCreateService",
+    "TouchInputService",
+    "VirtualInputManager",
+    "Visit",
+    "AnalyticsService",
+    "AssetService",
+    "FriendService",
+    "GroupService",
+    "PathfindingService",
+    "PolicyService",
+    "MessagingService",
+    "SocialService",
+    "TextService",
+    "NetworkServer",
+    "NetworkClient",
+    "ScriptContext",
+    "ScriptDebugger",
+    "PerformanceStatsService",
+    "HttpRbxApiService",
+    "MeshContentProvider",
+    "SolidModelContentProvider",
+    "Geometry",
+    "Instance",
+    "Selection",
+    "StarterGui",
+    "StudioService",
+    "PluginGuiService",
+    "PluginManager",
+    "AssetService",
+    "EmailService",
+    "GeometryService",
+    "InsertService",
+    "RenderSettings",
+    "StarterPack"
+  ],
+  "services": [
     "AdService",
     "AnalyticsService",
     "AssetService",
@@ -39,281 +94,398 @@
     "HSRDataContentProvider",
     "HapticService",
     "HttpRbxApiService",
+    "HttpService",
     "InsertService",
     "Instance",
     "JointsService",
     "LanguageService",
+    "Lighting",
     "LocalizationService",
     "LogService",
+    "MarketplaceService",
     "MemStorageService",
     "MeshContentProvider",
     "NotificationService",
     "PermissionsService",
     "PhysicsService",
+    "Players",
     "PluginDebugService",
     "PluginGuiService",
     "PointsService",
     "PolicyService",
     "ProcessInstancePhysicsService",
     "ReplicatedFirst",
+    "ReplicatedStorage",
+    "RunService",
     "ScriptContext",
     "Selection",
     "ServerScriptService",
     "ServerStorage",
     "SolidModelContentProvider",
+    "SoundService",
     "StarterGui",
     "StarterPack",
     "StarterPlayer",
     "Stats",
     "StudioService",
+    "Teams",
+    "TeleportService",
     "TestService",
+    "TextService",
     "TouchInputService",
+    "TweenService",
     "VRService",
     "VirtualInputManager",
     "Visit",
-    "DataStoreService",
-    "GroupService",
-    "ScriptEditorService"
+    "Workspace"
   ],
-  "classes": {
-    "Instance": {
-      "properties": {
-        "Name": "string",
-        "Parent": "Instance",
-        "ClassName": "string",
-        "Archivable": "boolean"
-      },
-      "methods": {
-        "FindFirstChild": "Instance",
-        "GetChildren": "Instance[]",
-        "Destroy": "void",
-        "Clone": "Instance",
-        "GetAttribute": "any",
-        "SetAttribute": "void"
-      }
+  "classes": [
+    {
+      "name": "Instance",
+      "superclass": null,
+      "properties": ["Name", "Parent", "Archivable"],
+      "methods": ["GetFullName()", "Clone()", "Destroy()", "FindFirstChild()"],
+      "events": ["Changed", "AncestryChanged"]
     },
-    "Part": {
-      "inherits": "Instance",
-      "properties": {
-        "Position": "Vector3",
-        "Size": "Vector3",
-        "Color": "Color3",
-        "Material": "Enum.Material",
-        "Anchored": "boolean",
-        "Shape": "Enum.PartType"
-      }
+    {
+      "name": "BasePart",
+      "superclass": "Instance",
+      "properties": ["Anchored", "CanCollide", "Color", "Material", "Size", "Position", "Velocity"],
+      "methods": ["GetMass()", "ApplyImpulse(Vector3)", "CanSetNetworkOwnership()", "GetTouchingParts()"],
+      "events": ["Touched", "TouchEnded", "GetPropertyChangedSignal()"]
     },
-    "Player": {
-      "inherits": "Instance",
-      "properties": {
-        "UserId": "number",
-        "Character": "Model",
-        "Backpack": "Backpack",
-        "Team": "Team"
-      }
+    {
+      "name": "Part",
+      "superclass": "BasePart",
+      "properties": ["Shape", "Material", "Transparency", "Reflectance"],
+      "methods": ["Resize(Enum.NormalId, number)", "SetNetworkOwner(Player)", "SetNetworkOwnershipAuto()"],
+      "events": []
     },
-    "Humanoid": {
-      "inherits": "Instance",
-      "properties": {
-        "WalkSpeed": "number",
-        "JumpPower": "number",
-        "Health": "number"
-      }
+    {
+      "name": "Model",
+      "superclass": "Instance",
+      "properties": ["PrimaryPart", "GetMass()", "Name"],
+      "methods": ["SetPrimaryPartCFrame(CFrame)", "GetPrimaryPartCFrame()"],
+      "events": []
     },
-    "GuiObject": {
-      "inherits": "Instance",
-      "properties": {
-        "Size": "UDim2",
-        "Position": "UDim2",
-        "Visible": "boolean"
-      }
+    {
+      "name": "Player",
+      "superclass": "Instance",
+      "properties": ["Name", "UserId", "Team", "Character"],
+      "methods": [],
+      "events": ["Chatted", "CharacterAdded", "CharacterRemoving"]
+    },
+    {
+      "name": "Humanoid",
+      "superclass": "Instance",
+      "properties": ["WalkSpeed", "Health", "MaxHealth", "JumpPower"],
+      "methods": ["TakeDamage(number)", "LoadAnimation(Animation)"],
+      "events": ["Died", "Running", "Jumping"]
+    },
+    {
+      "name": "Script",
+      "superclass": "Instance",
+      "properties": ["Source", "Disabled", "Name"],
+      "methods": ["Run()", "Destroy()"],
+      "events": ["DisabledChanged"]
+    },
+    {
+      "name": "RemoteEvent",
+      "superclass": "Instance",
+      "properties": ["Name", "Parent"],
+      "methods": ["FireClient(Player, ...)", "FireAllClients()", "FireServer()"],
+      "events": ["OnServerEvent", "OnClientEvent"]
+    },
+    {
+      "name": "RemoteFunction",
+      "superclass": "Instance",
+      "properties": ["Name", "Parent"],
+      "methods": ["InvokeServer(...)", "InvokeClient(Player, ...)"],
+      "events": ["OnServerInvoke", "OnClientInvoke"]
+    },
+    {
+      "name": "Tool",
+      "superclass": "Instance",
+      "properties": ["Grip", "GripPos", "GripForward", "GripUp", "RequiresHandle"],
+      "methods": ["Unequip()", "Equip()"],
+      "events": ["Activated", "Deactivated", "Equipped", "Unequipped"]
+    },
+    {
+      "name": "IntValue",
+      "superclass": "Instance",
+      "properties": ["Value", "Name"],
+      "methods": [],
+      "events": ["Changed"]
+    },
+    {
+      "name": "StringValue",
+      "superclass": "Instance",
+      "properties": ["Value", "Name"],
+      "methods": [],
+      "events": ["Changed"]
+    },
+    {
+      "name": "Vector3Value",
+      "superclass": "Instance",
+      "properties": ["Value", "Name"],
+      "methods": [],
+      "events": ["Changed"]
+    },
+    {
+      "name": "BrickColor",
+      "superclass": "Instance",
+      "properties": ["Number", "Color"],
+      "methods": ["ToColor3()", "new(numberOrName)"],
+      "events": []
+    },
+    {
+      "name": "CFrame",
+      "superclass": "Instance",
+      "properties": ["Position", "LookVector", "RightVector", "UpVector"],
+      "methods": ["Inverse()", "Lerp(CFrame, number)", "ToOrientation()", "new(x,y,z)"],
+      "events": []
+    },
+    {
+      "name": "TweenInfo",
+      "superclass": "Instance",
+      "properties": ["Time", "EasingStyle", "EasingDirection", "RepeatCount", "Reverses"],
+      "methods": ["new(time, style, direction, repeatCount, reverses)"],
+      "events": []
     }
-  },
+  ],
   "enums": {
-    "Material": [
-      "Plastic",
-      "Wood",
-      "Slate",
-      "Concrete",
-      "Metal",
-      "Glass",
-      "Granite"
-    ],
-    "Font": [
-      "Legacy",
-      "Arial",
-      "ArialBold",
-      "SourceSans",
-      "SourceSansBold",
-      "SourceSansLight",
-      "SourceSansItalic",
-      "Bodoni",
-      "Garamond",
-      "Cartoon",
-      "Code",
-      "Highway",
-      "SciFi",
-      "Arcade",
-      "Fantasy",
-      "Antique",
-      "SourceSansSemibold",
-      "Gotham",
-      "GothamMedium",
-      "GothamBold",
-      "GothamBlack",
-      "AmaticSC",
-      "Bangers",
-      "Creepster",
-      "DenkOne",
-      "Fondamento",
-      "FredokaOne",
-      "GrenzeGotisch"
-    ],
-    "AssetType": [
-      "Image",
-      "TShirt",
-      "Audio",
-      "Mesh",
-      "Lua",
-      "Hat",
-      "Place",
-      "Model",
-      "Shirt",
-      "Pants",
-      "Decal",
-      "Head",
-      "Face",
-      "Gear",
-      "Badge",
-      "Animation",
-      "Torso",
-      "RightArm",
-      "LeftArm",
-      "LeftLeg",
-      "RightLeg",
-      "Package",
-      "GamePass",
-      "Plugin",
-      "MeshPart",
-      "HairAccessory",
-      "FaceAccessory",
-      "NeckAccessory",
-      "ShoulderAccessory",
-      "FrontAccessory",
-      "BackAccessory"
-    ],
-    "CoreGuiType": [
-      "PlayerList",
-      "Health",
-      "Backpack",
-      "Chat",
-      "All",
-      "EmotesMenu",
-      "SelfView",
-      "Captures"
-    ],
-    "UserInputType": [
-      "MouseButton1",
-      "MouseButton2",
-      "MouseButton3",
-      "Touch",
-      "Keyboard",
-      "Gamepad1",
-      "Gamepad2",
-      "Gamepad3",
-      "Gamepad4"
-    ]
+    "PartType": ["Ball", "Block", "Cylinder", "Wedge", "CornerWedge"],
+    "Material": ["Plastic", "SmoothPlastic", "Neon", "Wood", "WoodPlanks", "Marble", "Concrete", "Slate", "Granite", "Brick", "Pebble", "Cobblestone", "Sandstone", "Basalt", "Glacier", "DiamondPlate", "Foil", "Metal", "Ice", "Grass", "Fabric", "Snow", "Mud", "Air", "Water", "Rock", "Terrain", "Glass"],
+    "Shape": ["Ball", "Block", "Cylinder", "Wedge", "CornerWedge"],
+    "NormalId": ["Top", "Bottom", "Front", "Back", "Left", "Right"],
+    "Axis": ["X", "Y", "Z"],
+    "SurfaceType": ["Smooth", "Studs", "Inlet", "Universal", "Hinge"],
+    "KeyCode": ["A", "B", "C", "D", "...", "Z", "Space", "Enter", "LeftShift", "RightShift", "Up", "Down", "Left", "Right"],
+    "UserInputType": ["MouseButton1", "MouseButton2", "Touch", "Gamepad1", "Gamepad2", "Keyboard"],
+    "AnimationPriority": ["Idle", "Movement", "Action", "Core"],
+    "CollisionGroup": ["Default", "Flying"],
+    "AvatarType": ["R6", "R15"],
+    "CapsLockMode": ["On", "Off"],
+    "Font": ["SourceSans", "SourceSansBold", "Cartoon", "GothamBlack"],
+    "FitMode": ["Stretch", "Letterbox", "Crop"]
   },
   "types": {
     "Vector3": {
-      "constructor": "new(x: number, y: number, z: number)",
-      "methods": ["Lerp", "Dot", "Magnitude"]
-    },
-    "CFrame": {
-      "constructor": "new(x: number, y: number, z: number)",
-      "methods": ["Inverse", "Lerp"]
-    },
-    "UDim2": {
-      "constructor": "new(xScale: number, xOffset: number, yScale: number, yOffset: number)",
-      "methods": []
+      "constructors": ["new(x:number,y:number,z:number)", "FromNormalId(normal:Enum.NormalId)", "FromAxis(axis:Enum.Axis)"],
+      "properties": ["zero", "one", "xAxis", "yAxis", "zAxis"],
+      "methods": ["Abs()", "Ceil()", "Floor()", "Sign()", "Cross(Vector3)", "Dot(Vector3)", "Angle(Vector3, Vector3)", "FuzzyEq(Vector3, number)", "Lerp(Vector3, number)", "Max(Vector3)", "Min(Vector3)"]
     },
     "Color3": {
-      "constructor": "new(r: number, g: number, b: number)",
+      "constructors": ["new(r:number,g:number,b:number)"],
+      "properties": ["fromRGB(r,g,b)", "fromHSV(h,s,v)", "Lerp(Color3, number)", "ToHSV()"],
+      "methods": []
+    },
+    "UDim": {
+      "constructors": ["new(scale:number, offset:number)"],
+      "properties": [],
+      "methods": []
+    },
+    "UDim2": {
+      "constructors": ["new(xScale:number,xOffset:number, yScale:number,yOffset:number)"],
+      "properties": [],
+      "methods": []
+    },
+    "Ray": {
+      "constructors": ["new(origin:Vector3, direction:Vector3)"],
+      "properties": ["Origin", "Direction"],
+      "methods": []
+    },
+    "Region3": {
+      "constructors": ["new(min:Vector3, max:Vector3)"],
+      "properties": ["CFrame", "Size"],
+      "methods": []
+    },
+    "NumberRange": {
+      "constructors": ["new(min:number, max:number)"],
+      "properties": [],
+      "methods": []
+    },
+    "NumberSequence": {
+      "constructors": ["new(keypoints: Array<NumberSequenceKeypoint>)"],
+      "properties": [],
+      "methods": []
+    },
+    "NumberSequenceKeypoint": {
+      "constructors": ["new(time:number, value:number, envelope:number)"],
+      "properties": [],
+      "methods": []
+    },
+    "NumberInterval": {
+      "constructors": ["new(min:number, max:number)"],
+      "properties": [],
+      "methods": []
+    },
+    "Rect": {
+      "constructors": ["new(min:Vector2, max:Vector2)"],
+      "properties": ["Min", "Max", "Width", "Height"],
+      "methods": []
+    },
+    "TweenInfo": {
+      "constructors": ["new(time:number, easingStyle:Enum.EasingStyle, easingDirection:Enum.EasingDirection, repeatCount:number, reverses:boolean)"],
+      "properties": [],
       "methods": []
     }
   },
-  "globals": {
-    "functions": [
-      "print",
-      "warn",
-      "error",
-      "require",
-      "spawn",
-      "delay",
-      "wait",
-      "tick",
-      "time",
-      "typeof",
-      "type",
-      "pcall",
-      "xpcall",
-      "assert",
-      "collectgarbage",
-      "getfenv",
-      "setfenv",
-      "getmetatable",
-      "setmetatable",
-      "rawequal",
-      "rawget",
-      "rawset",
-      "select",
-      "tonumber",
-      "tostring",
-      "unpack",
-      "math.abs",
-      "math.acos",
-      "math.asin",
-      "math.atan",
-      "math.ceil",
-      "math.cos",
-      "math.deg",
-      "math.exp",
-      "math.floor",
-      "math.fmod",
-      "math.frexp",
-      "math.ldexp",
-      "math.log",
-      "math.max",
-      "math.min",
-      "math.modf",
-      "math.pow",
-      "math.rad",
-      "math.random",
-      "math.randomseed",
-      "math.sin",
-      "math.sqrt",
-      "math.tan",
-      "string.byte",
-      "string.char",
-      "string.find",
-      "string.format",
-      "string.gmatch",
-      "string.gsub",
-      "string.len",
-      "string.lower",
-      "string.match",
-      "string.rep",
-      "string.reverse",
-      "string.sub",
-      "string.upper",
-      "table.insert",
-      "table.maxn",
-      "table.remove",
-      "table.sort"
-    ]
-  },
-    "snippets": {
-    "loadstring_rbx": "loadstring()",
-    "loadstring_http_stellar": "loadstring(game:HttpGet(\"url\"))()"
-  }
+  "functions": [
+    "print(...)",
+    "warn(...)",
+    "error(message)",
+    "assert(condition, message)",
+    "typeof(value)",
+    "wait(time)",
+    "delay(time, callback)",
+    "spawn(function)",
+    "task.wait(time)",
+    "task.delay(time, callback)",
+    "spawn(function)",
+    "require(ModuleScript)",
+    "pairs(table)",
+    "ipairs(table)",
+    "next(table)",
+    "tick()",
+    "os.time()",
+    "os.date(...)",
+    "string.format(format, ...)",
+    "string.gsub(str, pattern, replacement)",
+    "string.split(str, sep)",
+    "table.insert(table, position, value)",
+    "table.remove(table, position)",
+    "table.sort(table)",
+    "math.abs(x)",
+    "math.floor(x)",
+    "math.ceil(x)",
+    "math.sqrt(x)",
+    "math.random(min, max)",
+    "math.sin(x)",
+    "math.cos(x)",
+    "math.tan(x)",
+    "math.atan2(y, x)",
+    "math.log(x, base)",
+    "math.pi"
+  ],
+  "keywords": [
+    "local",
+    "function",
+    "end",
+    "if",
+    "then",
+    "else",
+    "elseif",
+    "for",
+    "while",
+    "repeat",
+    "until",
+    "do",
+    "return",
+    "break",
+    "continue",
+    "true",
+    "false",
+    "nil",
+    "self",
+    "workspace",
+    "script",
+    "Enum",
+    "Vector3",
+    "Color3",
+    "UDim2",
+    "CFrame",
+    "BrickColor",
+    "TweenInfo",
+    "NumberSequence",
+    "RaycastParams",
+    "Enum",
+    "game",
+    "Players",
+    "math",
+    "string",
+    "table"
+  ],
+  "snippets": [
+    {
+      "prefix": "newpart",
+      "body": [
+        "local part = Instance.new(\"Part\")",
+        "part.Name = \"${1:PartName}\"",
+        "part.Anchored = true",
+        "part.Position = Vector3.new(${2:0}, ${3:0}, ${4:0})",
+        "part.Parent = workspace"
+      ],
+      "description": "Create and position a new Part"
+    },
+    {
+      "prefix": "remoteconnect",
+      "body": [
+        "local remote = ${1:RemoteEvent}.OnServerEvent:Connect(function(player, ...)",
+        "    -- handle remote event",
+        "end)"
+      ],
+      "description": "Connect to a RemoteEvent (Server)"
+    },
+    {
+      "prefix": "tween",
+      "body": [
+        "local TweenService = game:GetService(\"TweenService\")",
+        "local tweenInfo = TweenInfo.new(${1:1}, Enum.EasingStyle.${2:Quad}, Enum.EasingDirection.${3:Out})",
+        "local tween = TweenService:Create(${4:part}, tweenInfo, {${5:Property} = ${6:Value}})",
+        "tween:Play()"
+      ],
+      "description": "Create and play a Tween on a property"
+    },
+    {
+      "prefix": "raycast",
+      "body": [
+        "local origin = ${1:Vector3.new(0,0,0)}",
+        "local direction = ${2:Vector3.new(0,-1,0)}",
+        "local params = RaycastParams.new()",
+        "params.FilterDescendantsInstances = {workspace}",
+        "params.FilterType = Enum.RaycastFilterType.Blacklist",
+        "local result = workspace:Raycast(origin, direction, params)",
+        "if result then",
+        "    print(\"Hit:\", result.Instance:GetFullName())",
+        "end"
+      ],
+      "description": "Perform a Raycast from origin in a direction"
+    },
+    {
+      "prefix": "datastore",
+      "body": [
+        "local DataStoreService = game:GetService(\"DataStoreService\")",
+        "local store = DataStoreService:GetDataStore(\"${1:MyDataStore}\")",
+        "local success, err = pcall(function()",
+        "    store:SetAsync(${2:key}, ${3:value})",
+        "end)",
+        "if not success then",
+        "    warn(\"DataStore error:\", err)",
+        "end"
+      ],
+      "description": "Basic DataStore SetAsync"
+    },
+    {
+      "prefix": "onplayeradded",
+      "body": [
+        "game.Players.PlayerAdded:Connect(function(player)",
+        "    -- Player joined",
+        "end)"
+      ],
+      "description": "PlayerAdded event handler"
+    },
+    {
+      "prefix": "touched",
+      "body": [
+        "${1:part}.Touched:Connect(function(hit)",
+        "    local player = game.Players:GetPlayerFromCharacter(hit.Parent)",
+        "    if player then",
+        "        -- do something with player",
+        "    end",
+        "end)"
+      ],
+      "description": "Part Touched event handler"
+    }
+  ]
 }

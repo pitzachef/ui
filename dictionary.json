@@ -13,9 +13,68 @@
     "Teams",
     "TextService",
     "TeleportService",
-    "TweenService"
+    "TweenService",
+    "AdService",
+    "AnalyticsService",
+    "AssetService",
+    "BadgeService",
+    "ChangeHistoryService",
+    "Chat",
+    "CollectionService",
+    "ContentProvider",
+    "ContextActionService",
+    "CookiesService",
+    "CoreGui",
+    "Debris",
+    "DebuggerManager",
+    "DraftsService",
+    "DraggerService",
+    "FilteredSelection",
+    "FriendService",
+    "GamePassService",
+    "GamepadService",
+    "Geometry",
+    "GroupService",
+    "GuiService",
+    "HSRDataContentProvider",
+    "HapticService",
+    "HttpRbxApiService",
+    "InsertService",
+    "Instance",
+    "JointsService",
+    "LanguageService",
+    "LocalizationService",
+    "LogService",
+    "MemStorageService",
+    "MeshContentProvider",
+    "NotificationService",
+    "PermissionsService",
+    "PhysicsService",
+    "PluginDebugService",
+    "PluginGuiService",
+    "PointsService",
+    "PolicyService",
+    "ProcessInstancePhysicsService",
+    "ReplicatedFirst",
+    "ScriptContext",
+    "Selection",
+    "ServerScriptService",
+    "ServerStorage",
+    "SolidModelContentProvider",
+    "StarterGui",
+    "StarterPack",
+    "StarterPlayer",
+    "Stats",
+    "StudioService",
+    "TestService",
+    "TouchInputService",
+    "VRService",
+    "VirtualInputManager",
+    "Visit",
+    "DataStoreService",
+    "GroupService",
+    "ScriptEditorService"
   ],
-  
   "classes": {
     "Instance": {
       "properties": {
@@ -33,7 +92,6 @@
         "SetAttribute": "void"
       }
     },
-    
     "Part": {
       "inherits": "Instance",
       "properties": {
@@ -41,10 +99,10 @@
         "Size": "Vector3",
         "Color": "Color3",
         "Material": "Enum.Material",
-        "Anchored": "boolean"
+        "Anchored": "boolean",
+        "Shape": "Enum.PartType"
       }
     },
-    
     "Player": {
       "inherits": "Instance",
       "properties": {
@@ -54,7 +112,6 @@
         "Team": "Team"
       }
     },
-    
     "Humanoid": {
       "inherits": "Instance",
       "properties": {
@@ -62,9 +119,16 @@
         "JumpPower": "number",
         "Health": "number"
       }
+    },
+    "GuiObject": {
+      "inherits": "Instance",
+      "properties": {
+        "Size": "UDim2",
+        "Position": "UDim2",
+        "Visible": "boolean"
+      }
     }
   },
-  
   "enums": {
     "Material": [
       "Plastic",
@@ -74,9 +138,92 @@
       "Metal",
       "Glass",
       "Granite"
+    ],
+    "Font": [
+      "Legacy",
+      "Arial",
+      "ArialBold",
+      "SourceSans",
+      "SourceSansBold",
+      "SourceSansLight",
+      "SourceSansItalic",
+      "Bodoni",
+      "Garamond",
+      "Cartoon",
+      "Code",
+      "Highway",
+      "SciFi",
+      "Arcade",
+      "Fantasy",
+      "Antique",
+      "SourceSansSemibold",
+      "Gotham",
+      "GothamMedium",
+      "GothamBold",
+      "GothamBlack",
+      "AmaticSC",
+      "Bangers",
+      "Creepster",
+      "DenkOne",
+      "Fondamento",
+      "FredokaOne",
+      "GrenzeGotisch"
+    ],
+    "AssetType": [
+      "Image",
+      "TShirt",
+      "Audio",
+      "Mesh",
+      "Lua",
+      "Hat",
+      "Place",
+      "Model",
+      "Shirt",
+      "Pants",
+      "Decal",
+      "Head",
+      "Face",
+      "Gear",
+      "Badge",
+      "Animation",
+      "Torso",
+      "RightArm",
+      "LeftArm",
+      "LeftLeg",
+      "RightLeg",
+      "Package",
+      "GamePass",
+      "Plugin",
+      "MeshPart",
+      "HairAccessory",
+      "FaceAccessory",
+      "NeckAccessory",
+      "ShoulderAccessory",
+      "FrontAccessory",
+      "BackAccessory"
+    ],
+    "CoreGuiType": [
+      "PlayerList",
+      "Health",
+      "Backpack",
+      "Chat",
+      "All",
+      "EmotesMenu",
+      "SelfView",
+      "Captures"
+    ],
+    "UserInputType": [
+      "MouseButton1",
+      "MouseButton2",
+      "MouseButton3",
+      "Touch",
+      "Keyboard",
+      "Gamepad1",
+      "Gamepad2",
+      "Gamepad3",
+      "Gamepad4"
     ]
   },
-  
   "types": {
     "Vector3": {
       "constructor": "new(x: number, y: number, z: number)",
@@ -85,28 +232,88 @@
     "CFrame": {
       "constructor": "new(x: number, y: number, z: number)",
       "methods": ["Inverse", "Lerp"]
+    },
+    "UDim2": {
+      "constructor": "new(xScale: number, xOffset: number, yScale: number, yOffset: number)",
+      "methods": []
+    },
+    "Color3": {
+      "constructor": "new(r: number, g: number, b: number)",
+      "methods": []
     }
   },
-  
-  "synapse": {
+  "globals": {
     "functions": [
-      "getgenv",
-      "getrenv",
-      "request",
-      "loadstring",
-      "hookfunction",
-      "getgc",
-      "is_synapse_function"
-    ],
-    "drawing": [
-      "NewText",
-      "NewLine",
-      "NewCircle",
-      "NewSquare"
-    ],
+      "print",
+      "warn",
+      "error",
+      "require",
+      "spawn",
+      "delay",
+      "wait",
+      "tick",
+      "time",
+      "typeof",
+      "type",
+      "pcall",
+      "xpcall",
+      "assert",
+      "collectgarbage",
+      "getfenv",
+      "setfenv",
+      "getmetatable",
+      "setmetatable",
+      "rawequal",
+      "rawget",
+      "rawset",
+      "select",
+      "tonumber",
+      "tostring",
+      "unpack",
+      "math.abs",
+      "math.acos",
+      "math.asin",
+      "math.atan",
+      "math.ceil",
+      "math.cos",
+      "math.deg",
+      "math.exp",
+      "math.floor",
+      "math.fmod",
+      "math.frexp",
+      "math.ldexp",
+      "math.log",
+      "math.max",
+      "math.min",
+      "math.modf",
+      "math.pow",
+      "math.rad",
+      "math.random",
+      "math.randomseed",
+      "math.sin",
+      "math.sqrt",
+      "math.tan",
+      "string.byte",
+      "string.char",
+      "string.find",
+      "string.format",
+      "string.gmatch",
+      "string.gsub",
+      "string.len",
+      "string.lower",
+      "string.match",
+      "string.rep",
+      "string.reverse",
+      "string.sub",
+      "string.upper",
+      "table.insert",
+      "table.maxn",
+      "table.remove",
+      "table.sort"
+    ]
+  },
     "snippets": {
-      "loadstring_rbx": "loadstring('(cursor select here)')",
-      "loadstring_http": "loadstring(game:HttpGet('url (CURSOR/SELECT HERE)'))()"
-    }
+    "loadstring_rbx": "loadstring()",
+    "loadstring_http_stellar": "loadstring(game:HttpGet(\"url\"))()"
   }
 }

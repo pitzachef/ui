@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Luau Editor with Enhanced IntelliSense</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        #container {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .error-message {
+            background-color: rgba(255, 0, 0, 0.1);
+            border-left: 3px solid red;
+            padding: 2px 6px;
+            margin-left: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs/loader.min.js"></script>
+    <script>
+        require.config({
+            paths: { vs: 'https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.36.1/min/vs' },
+            'vs/nls': { availableLanguages: { '*': 'en' } }
+        });
+
+        require(['vs/editor/editor.main'], function () {
+            monaco.languages.register({ id: 'luau' });
+
+            monaco.languages.setMonarchTokensProvider('luau', {
+                tokenizer: {
+                    root: [
+                        [/\b(local|function|end|if|then|else|elseif|while|do|for|in|repeat|until|return|type|typeof|continue|export)\b/, 'keyword'],
+                        [/\b(true|false|nil|any|number|string|boolean|void|unknown|never)\b/, 'type'],
+                        [/[a-zA-Z_]\w*/, 'identifier'],
+                        { include: '@whitespace' },
+                        [/[{}()\[\]]/, '@brackets'],
+                        [/\d+\.\d+/, 'number.float'],
+                        [/\d+/, 'number'],
+                        [/".*?"/, 'string'],
+                        [/'.*?'/, 'string'],
+                        [/--\[=*\[.*\]=*\]/, 'comment'],
+                        [/--.*$/, 'comment']
+                    ],
+                    whitespace: [
+                        [/[ \t\r\n]+/, 'white'],
+                    ]
+                }
+            });
+
+            const knownFunctions = {
+                add: {
+                    signature: 'add(a: number, b: number): number',
+                    documentation: 'Adds two numbers together.',
+                    parameters: [
+                        { label: 'a: number', documentation: 'First number' },
+                        { label: 'b: number', documentation: 'Second number' }
+                    ]
+                },
+                subtract: {
+                    signature: 'subtract(a: number, b: number): number',
+                    documentation: 'Subtracts b from a.',
+                    parameters: [
+                        { label: 'a: number', documentation: 'Minuend' },
+                        { label: 'b: number', documentation: 'Subtrahend' }
+                    ]
+                }
+            };
+
+            const editor = monaco.editor.create(document.getElementById('container'), {
+                value: [
+                    '-- Enhanced Luau Editor Example',
+                    'local function add(a: number, b: number): number',
+                    '    return a + b',
+                    'end',
+                    '',
+                    'local result = add(5, 3)',
+                    'print(result)'
+                ].join('\n'),
+                language: 'luau',
+                theme: 'vs-dark',
+                fontSize: 14,
+                lineNumbers: 'on',
+                automaticLayout: true,
+                minimap: { enabled: true },
+                cursorSmoothCaretAnimation: true,
+                scrollBeyondLastLine: false,
+                smoothScrolling: true,
+                mouseWheelSmoothScroll: true,
+                mouseWheelZoom: true,
+                renderWhitespace: 'none',
+                quickSuggestions: true,
+                suggestOnTriggerCharacters: true,
+                tabCompletion: 'on',
+                wordBasedSuggestions: true,
+                parameterHints: { enabled: true },
+                hover: { enabled: true }
+            });
+
+            monaco.languages.registerCompletionItemProvider('luau', {
+                triggerCharacters: ['(', '.', ':'],
+                provideCompletionItems: (model, position) => {
+                    const suggestions = [];
+
+                    for (const [name, data] of Object.entries(knownFunctions)) {
+                        suggestions.push({
+                            label: name,
+                            kind: monaco.languages.CompletionItemKind.Function,
+                            insertText: `${name}($1, $2)`,
+                            insertTextRules: monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+                            documentation: data.documentation,
+                            detail: data.signature,
+                            range: {
+                                startLineNumber: position.lineNumber,
+                                endLineNumber: position.lineNumber,
+                                startColumn: model.getWordUntilPosition(position).startColumn,
+                                endColumn: model.getWordUntilPosition(position).endColumn
+                            }
+                        });
+                    }
+
+                    return { suggestions };
+                }
+            });
+
+            monaco.languages.registerSignatureHelpProvider('luau', {
+                signatureHelpTriggerCharacters: ['(', ','],
+                provideSignatureHelp: (model, position) => {
+                    const line = model.getLineContent(position.lineNumber);
+                    const match = line.substring(0, position.column).match(/(\w+)\s*\(([^)]*)$/);
+                    if (!match) return;
+
+                    const funcName = match[1];
+                    const args = match[2].split(',').length - 1;
+
+                    const func = knownFunctions[funcName];
+                    if (!func) return;
+
+                    return {
+                        value: {
+                            signatures: [{
+                                label: func.signature,
+                                documentation: func.documentation,
+                                parameters: func.parameters
+                            }],
+                            activeSignature: 0,
+                            activeParameter: args
+                        },
+                        dispose: () => {}
+                    };
+                }
+            });
+
+            monaco.languages.registerHoverProvider('luau', {
+                provideHover: (model, position) => {
+                    const word = model.getWordAtPosition(position);
+                    if (!word) return;
+
+                    const func = knownFunctions[word.word];
+                    if (!func) return;
+
+                    return {
+                        range: new monaco.Range(position.lineNumber, word.startColumn, position.lineNumber, word.endColumn),
+                        contents: [
+                            { value: `**${func.signature}**` },
+                            { value: func.documentation }
+                        ]
+                    };
+                }
+            });
+
+            // Optional: error checking
+            const checkErrors = () => {
+                const model = editor.getModel();
+                const value = model.getValue();
+                const lines = value.split('\n');
+                const markers = [];
+
+                lines.forEach((line, i) => {
+                    if (line.includes('add("')) {
+                        markers.push({
+                            severity: monaco.MarkerSeverity.Error,
+                            message: 'Type error: expected number, got string',
+                            startLineNumber: i + 1,
+                            endLineNumber: i + 1,
+                            startColumn: line.indexOf('add') + 1,
+                            endColumn: line.length
+                        });
+                    }
+                });
+
+                monaco.editor.setModelMarkers(model, 'luau', markers);
+            };
+
+            editor.onDidChangeModelContent(() => {
+                clearTimeout(window.errorDebounce);
+                window.errorDebounce = setTimeout(checkErrors, 300);
+            });
+
+            checkErrors();
+        });
+    </script>
+</body>
+</html>
